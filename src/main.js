@@ -1,17 +1,16 @@
 const prompt = require('prompt-sync')();
-const btree = require('./btree.js');
-const utilFn = require('./util.js');
-const stackFn = require('./stack.js');
+const tree = require('./tree.js');
+const stack = require('./stack.js');
 const table = require('./table.js');
 const display = require('./displayconsole.js');
-const nameconvert = require('./nameoperator.js');
+const nameoperator = require('./nameoperator.js');
 
-var formulaInput = prompt('Enter Formula: ');
+var formula_input = prompt('Enter Formula: ');
 //var sample_formula = "(p + q) * (!p * r)";
 
 //formulaInput = utilFn.clearWhiteSpaces(formulaInput);
-formulaInput = nameconvert.convertToProperNotation(formulaInput);
-if(formulaInput.includes("Error")){
+formula_input = nameoperator.convertToProperNotation(formula_input);
+if(formula_input.includes("Error")){
     
     //for future error output
     console.log("Error: Curly Braces aren't cloed!");
@@ -20,13 +19,13 @@ if(formulaInput.includes("Error")){
 
 
 
-var orderArray = btree.makeOrderOperation(formulaInput);
+var orderArray = tree.makeOrderOperation(formula_input);
 
-var tree = btree.inputToTree(formulaInput,orderArray);
+var data_tree = tree.inputToTree(formula_input,orderArray);
 
 
-var s = stackFn.createStack(tree);
-var tab = table.createTable(s);
+var data_stack = stack.createStack(data_tree);
+var tab = table.createTable(data_stack);
 
 display.displayVariableMatrix(tab);
 //tesst

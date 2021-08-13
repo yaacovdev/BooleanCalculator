@@ -1,5 +1,4 @@
-const utilFn = require("./util.js");
-const btree = require("./btree.js");
+const util = require("./util.js");
 const algebra = require('./algebra.js');
 
 function createStack(Root){

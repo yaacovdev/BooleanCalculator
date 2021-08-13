@@ -1,4 +1,3 @@
-const displayM = require('./displayconsole.js');
 const algebra = require('./algebra');
 
 var varArray = [];

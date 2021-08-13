@@ -1,5 +1,5 @@
 const algebra = require('./algebra.js');
-const utilFn = require('./util.js');
+const util = require('./util.js');
 
 //Makes an array of 2 values that make up positions of the parenthesis in the equation
 function parenthesisLengths(input){
@@ -101,7 +101,7 @@ function inputToTree(formula, orderArray){
         final: false
     };
 
-    var root = new utilFn.Leaf(big_data);
+    var root = new util.Leaf(big_data);
 
 
     root = traverseCreateTree(root);
@@ -122,44 +122,22 @@ function traverseCreateTree(Root){
     Root.right = traverseCreateTree(Root.right);
     return Root;
 }
-/*
-//iterative creation binary tree
-function traverseCreateTree(Root){
-    if(Root == null){
-        return Root;
-    }
-
-    var stack = [];
-    stack.push(Root);
-    while(stack.length > 0){
-        var newnode = stack[stack.length-1];
-        newnode = makeIntoNode(newnode.data);
-        console.log("debug newnode",newnode);
-        
-        stack.pop();
-
-        //finish later
-        if(newnode.left != null) stack.push(newnode.left);
-        if(newnode.right != null) stack.push(newnode.right);
-    }
-    return Root;
-}*/
 
 //expands a leaf where it has a left and right leaf if possible
 function makeIntoNode(data){
     //console.log("debug data in makeIntoNode", data);
     if(data.order.length == 0){
-        data.formula = utilFn.clearNonAlphabetChars(data.formula);
+        data.formula = util.clearNonAlphabetChars(data.formula);
         data.final = true;
         //if(utilFn.checkValidVariable(data.formula)){
-        return new utilFn.Leaf(data);
+        return new util.Leaf(data);
         /*}
         else{
             throw new Error("Error naming variables");
         } */
     }
     else if(data.final == true){
-        return new utilFn.Leaf(data);
+        return new util.Leaf(data);
     }
 
     //do the operation to break the formula in two
@@ -216,11 +194,11 @@ function makeIntoNode(data){
 
     
 
-    var node = new utilFn.Leaf(m_data);
+    var node = new util.Leaf(m_data);
     
     if(m_data.formula == '!'){
         if(l_data.order.length == 0){
-            l_data.formula = utilFn.clearNonAlphabetChars(l_data.formula);
+            l_data.formula = util.clearNonAlphabetChars(l_data.formula);
         }
         if(l_data.formula.length == 0)
             node.left = null;
@@ -228,9 +206,9 @@ function makeIntoNode(data){
             throw new Error("Wrong NOT operator use");
         }
     }else{
-        node.left = new utilFn.Leaf(l_data);
+        node.left = new util.Leaf(l_data);
     }
-    node.right = new utilFn.Leaf(r_data);
+    node.right = new util.Leaf(r_data);
 
     return node;
 }
