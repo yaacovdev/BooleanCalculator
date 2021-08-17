@@ -46,7 +46,9 @@ function convertToProperNotation(input){
     }
     
     if(curlybrace){
-        return "Error: curly brace not closed";
+        
+        //Cheap solution to the problem of having a display of proper errors
+        return "^Error: Curly Braces Not Closed";
     }
     return input;
 }

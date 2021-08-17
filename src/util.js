@@ -7,8 +7,6 @@ class Leaf {
     }
 }
 
-//Not used
-
 //clears all whitespaces
 function clearWhiteSpaces(string){
     return string.replace(/\s/g, "");

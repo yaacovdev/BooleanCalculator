@@ -1,5 +1,4 @@
-
-/*
+4/*
 Outputs Matrix to Console
 */
 
@@ -32,9 +31,6 @@ function stringSpaces(n){
     }
     return str;
 }
-
-//test = initLogic(test);
-//displayVariableMatrix(test);
 
 module.exports = {
     displayVariableMatrix

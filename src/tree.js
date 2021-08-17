@@ -16,11 +16,11 @@ function parenthesisLengths(input){
         if(input.charAt(i) == '{' && variablename == false){ variablename = true; continue}
         else if(input.charAt(i) == '}' && variablename == true){ variablename = false; continue;}
         else if(input.charAt(i) == '{' && variablename == true || input.charAt(i) == '}' && variablename == false){
-            throw new Error("Wrong Symbols In Variable Name");
+            return "Error: Wrong Symbols In Variable Name";
         }
 
         if(variablename == true && algebra.operator_priority.includes(input.charAt(i))){
-            throw new Error("Wrong Symbols In Variable Name");
+            return "Error: Wrong Symbols In Variable Name";
         }
         
         if(variablename) continue;
@@ -36,7 +36,7 @@ function parenthesisLengths(input){
                 while(B[empty_track_b][1] != -1){
                     empty_track_b--;
                     if(empty_track_b < 0){
-                        throw new TypeError('Incorrect Parenthesis');
+                        return "Error: Incorrect Parenthesis";
                     }
                 }
                 B[empty_track_b][1] = i;
@@ -49,7 +49,7 @@ function parenthesisLengths(input){
     for(var i = 0; i < B.length; i++)
     {
         if(B[i][1] == -1){
-            throw new TypeError('Incorrect Parenthesis');
+            return "Error: Incorrect Parenthesis";
         }
     }
 
@@ -66,13 +66,17 @@ function checkUnmarkedOperation(operatorsArray, place){
 
 function makeOrderOperation(inputCommand){
     
-    var ParanthesisArray = parenthesisLengths(inputCommand);
+    var ParenthesisArray = parenthesisLengths(inputCommand);
+    //Error Message
+    if(typeof(ParenthesisArray) == "string"){
+        return ParenthesisArray;
+    }
         
     var markedOperators = [];
 
-    for(var i = ParanthesisArray.length-1; i >= 0; i--){
+    for(var i = ParenthesisArray.length-1; i >= 0; i--){
         for(var j = 0; j < algebra.operator_priority.length; j++){
-            for(var k = ParanthesisArray[i][0]; k <= ParanthesisArray[i][1]; k++){
+            for(var k = ParenthesisArray[i][0]; k <= ParenthesisArray[i][1]; k++){
                 
                 if(inputCommand[k] == algebra.operator_priority[j] && 
                     checkUnmarkedOperation(markedOperators, k)){
@@ -105,10 +109,13 @@ function inputToTree(formula, orderArray){
 
 
     root = traverseCreateTree(root);
+    if(ErrorThrowingRecursion_traverseCreateTree){
+        return "Error: Incorrect Format of Input";
+    }
     return root;
 }
 
-
+var ErrorThrowingRecursion_traverseCreateTree = false;
 //works, however an iterative solution can always be made
 function traverseCreateTree(Root){
     
@@ -117,6 +124,9 @@ function traverseCreateTree(Root){
     }
 
     Root = makeIntoNode(Root.data);
+    if(typeof(Root) == "string"){
+        ErrorThrowingRecursion_traverseCreateTree = true;
+    }
     
     Root.left = traverseCreateTree(Root.left);
     Root.right = traverseCreateTree(Root.right);
@@ -125,22 +135,17 @@ function traverseCreateTree(Root){
 
 //expands a leaf where it has a left and right leaf if possible
 function makeIntoNode(data){
-    //console.log("debug data in makeIntoNode", data);
     if(data.order.length == 0){
         data.formula = util.clearNonAlphabetChars(data.formula);
         data.final = true;
-        //if(utilFn.checkValidVariable(data.formula)){
+       
         return new util.Leaf(data);
-        /*}
-        else{
-            throw new Error("Error naming variables");
-        } */
+        
     }
     else if(data.final == true){
         return new util.Leaf(data);
     }
 
-    //do the operation to break the formula in two
     
     var p = data.order.length-1;
     
@@ -154,7 +159,6 @@ function makeIntoNode(data){
     r_data.pos = [...data.pos];
 
     m_data.formula = data.formula[data.order[p]-data.pos[0]];
-    //console.log(data.pos[0]);
 
     m_data.order = [data.order[p]];
     l_data.order = [];
@@ -163,8 +167,6 @@ function makeIntoNode(data){
     m_data.pos[0] = data.order[p];
     m_data.pos[1] = data.order[p];
     m_data.final = true;
-    
-    //console.log(m_data.order, m_data.formula, data.order[p],"from ",data);
 
     l_data.pos[0] = data.pos[0];
     l_data.pos[1] = data.order[p]-1;
@@ -192,8 +194,6 @@ function makeIntoNode(data){
         }
     }
 
-    
-
     var node = new util.Leaf(m_data);
     
     if(m_data.formula == '!'){
@@ -203,7 +203,7 @@ function makeIntoNode(data){
         if(l_data.formula.length == 0)
             node.left = null;
         else{
-            throw new Error("Wrong NOT operator use");
+            return "E";
         }
     }else{
         node.left = new util.Leaf(l_data);
