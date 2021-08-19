@@ -17,6 +17,7 @@ example problem: (p AND q) OR (q AND NOT {v})
 The software is written in javascript and must be started with running BooleanCalculator.js file. 
 In Node.js you can start the program with "node src/BooleanCalculator.js"
 
-
+UPCOMING:
+Improvements for Console Interface=
 
 Yaacov Kochatkov
