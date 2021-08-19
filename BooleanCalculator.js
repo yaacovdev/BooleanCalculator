@@ -1,9 +1,9 @@
 const prompt = require('prompt-sync')();
-const tree = require('./tree.js');
-const stack = require('./stack.js');
-const table = require('./table.js');
-const display = require('./displayconsole.js');
-const nameoperator = require('./nameoperator.js');
+const tree = require('./lib/tree.js');
+const stack = require('./lib/stack.js');
+const table = require('./lib/table.js');
+const display = require('./lib/displayconsole.js');
+const nameoperator = require('./lib/nameoperator.js');
 
 var formula_input = prompt('Enter Formula: ');
 
