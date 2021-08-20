@@ -30,7 +30,7 @@ if(typeof(data_stack) == "string"){
     console.log(data_stack);
     return;
 }
-
 var tab = table.createTable(data_stack);
 
+process.stdout.write('\n');
 display.displayVariableMatrix(tab);
