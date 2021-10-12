@@ -12,7 +12,7 @@ The XOR (EXCLUSIVE OR) operators are (@, XOR, EXCLSOR)
 
 If you want to use operator characters as variables you must write them inside curly brackets '{', '}'.
 
-example problem: (p AND q) OR (q AND NOT {v})\
+example problem: (p AND q) OR (q AND NOT {v})
 
 Note: The software neglects spaces for operators, meaning that if you type in 'v' or 'V' inside a variable name, it will try to use that 
 char in the input string as an operator, often resulting in error.
