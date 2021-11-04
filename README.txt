@@ -1,6 +1,6 @@
 Boolean Calculator (Console) v. 1.1
 
-This calculator is able to find all solutions for boolean variables in the problem.
+This calculator is able to find all solutions for boolean equation in the problem, listing the result of all possible values for combination of variables.
 
 INSTRUCTIONS:
 In the promt, in console, type the problem you wish to solve. 
